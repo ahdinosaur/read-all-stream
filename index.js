@@ -23,6 +23,9 @@ module.exports = function read(stream, options, cb) {
 	var err = null;
 
 	stream.on('data', function (chunk) {
+		if (!Buffer.isBuffer(chunk)) {
+			chunk = new Buffer(chunk)
+		}
 		chunks.push(chunk);
 		len += chunk.length;
 	});
